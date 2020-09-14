@@ -15,7 +15,7 @@ const path = require('path');
 const landingRouter = require('./routes/landing')
 const booksRouter = require('./routes/books');
 const userRouter = require('./routes/user')
-const registerRouter = require('./routes/register')
+const genreRouter = require('./routes/genre')
 const profileRouter = require('./routes/profile');
 
 
@@ -48,7 +48,7 @@ app.use('/auth-user', authUserRouter);
 
 //front-end mounted routes
 app.use('/books', booksRouter)
-app.use('/register', registerRouter)
+app.use('/genre', genreRouter)
 app.use('/user', userRouter)
 app.use('/user/profile', profileRouter);
 // general error handler code, more specialized error handling in utils.js

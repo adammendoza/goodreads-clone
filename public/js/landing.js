@@ -58,7 +58,7 @@ signUpForm.addEventListener('submit', async (e) => {
           localStorage.setItem("BADREADS_CURRENT_USER_ID", id);
 
           //redirect user to my-books page after login to display shelves
-          window.location.href = "/register";
+          window.location.href = "/genre";
 
       }catch(err){
           console.log(err)

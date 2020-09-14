@@ -1,9 +1,12 @@
 
-const genreInfo = JSON.parse(localStorage.getItem('genreInfo')) || {};
+const genreInfo = JSON.parse(localStorage.getItem('genreInfo')) //|| {};
+const userInfo = JSON.parse(localStorage.getItem('BADREADS_CURRENT_USER_ID')) //|| {};
 // const activeInfo = JSON.parse(localStorage.getItem('activeInfo')) || {};
 const $checkboxes = $("#availableGenres :checkbox");
 const $selectAllButton = $("#genre-select-all");
-const $submitButton = $("#genre-submit")
+const submitButton = document.getElementById('genre-submit');
+// const $submitButton = $("#genre-submit")
+const $genreForm = $("#genres-form");
 
 function allChecked() {
   return $checkboxes.length === $checkboxes.filter(":checked").length;
@@ -22,15 +25,15 @@ function updateStorage() {
     genreInfo[this.id] = this.checked;
   });
 
-// function updateActive() {
-//   $checkboxes.each(function () {
-//     if($(this).is(":checked")) {
-//       $(this).attr("id").addClass("active");
-//     } else {
-//       $(this).attr("id").removeClass("active");
-//     }
-//   })
-// }
+  function updateActive() {
+    $checkboxes.each(function () {
+      if ($(this).is(":checked")) {
+        $(this).attr("id").addClass("active");
+      } else {
+        $(this).attr("id").removeClass("active");
+      }
+    })
+  }
 
   genreInfo["buttonText"] = $selectAllButton.text();
   localStorage.setItem("genreInfo", JSON.stringify(genreInfo));
@@ -56,15 +59,70 @@ $.each(genreInfo, function (key, value) {
   // updateActive();
 });
 
-
-
+//
 $selectAllButton.text(genreInfo["buttonText"]);
 
+// submitButton.addEventListener("click", event => {
+//   event.preventDefault();
+//   const objectArray = [];
+//   console.log(genreInfo);
+//   for (let genre in genreInfo) {
+//     if(genreInfo[genre]) {
+//       objectArray.push(genre.split('-')[1]);
+//     };
+//   }
+//   console.log(objectArray);
+// });
 
-$submitButton.on("click", function ( event ) {
+
+submitButton.addEventListener("click", async (event) => {
   event.preventDefault();
-  $(location).attr('href', '/user/shelves');
-})
+  const objectArray = [];
+  for (let genre in genreInfo) {
+    if (genreInfo[genre]) {
+      objectArray.push(genre.split('-')[1]);
+    };
+  }
+  console.log(`this is the object literal: ` + genreInfo);
+  console.log(`this is the array: ` + objectArray);
+  await fetch('/api-user/profile', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem(
+        "BADREADS_ACCESS_TOKEN"
+      )}`,
+    },
+    body: JSON.stringify({ objectArray })
+  })
+    window.location.href = "user/profile";
+});
+
+// $(location).attr('href', '/user/profile');
+// // })
+
+// document.addEventListener("DOMContentLoaded", () => {
+
+  // submitButton.addEventListener("click", event => {
+  //   event.preventDefault();
+
+  //   $(location).attr('href', '/user/profile');
+  // })
+// })
+// $submitButton.on("click", function ( event ) {
+//   const genre = document.getElementById("genres-form");
+//   event.preventDefault();
+
+//   const formData = new FormData(genre);
+
+//   const checkbox = $('#genres-form').find("input[type=checkbox]");
+//   $.each(checkbox, function (key, val) {
+//     formData.append($(val).attr('name'), $(val).is(':checked'))
+//   });
+//   console.log(formData);
+//
+//   $(location).attr('href', '/user/profile');
+// })
 
 
 // old Code
@@ -100,3 +158,9 @@ $submitButton.on("click", function ( event ) {
 // genreInfo.forEach((key, value) => {
 //   ('#' + key).checked = value;
 // });
+
+
+
+
+
+// localstorage split it and grab name with includes

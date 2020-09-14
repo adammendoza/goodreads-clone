@@ -14,11 +14,16 @@ router.get('/', asyncHandler(async (req, res) => {
     order: [['name', 'ASC']]
   })
   console.log(genres);
-  res.render('register', {
-    title: 'Register',
+  res.render('genre', {
+    title: 'Genres',
     genres
   });
 }));
+
+// router.post('?', asyncHandler(async (req, res) => {
+
+// }))
+
 
 
 module.exports = router

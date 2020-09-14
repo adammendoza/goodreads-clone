@@ -6,15 +6,15 @@ block content
 
   div(class='container genre-container')
     h2(class="genre-container__header") Pick your favorite genres
-    form(class="genre-container__form")
+    form(id="genres-form" class="genre-container__form")
       div(class="genre-container__row")
-      div(class="form-group genre-container__form-group")
+      div( class="form-group genre-container__form-group")
         div(id="availableGenres" class="genre-container__genre-group")
           for genre in genres
             +genreButton(genre)
       div(class="genre-container__button-container")
         label(type="button" id="genre-select-all" class="genre-container__selectAll btn-styling btn btn-default")
-        label(type="button" id="genre-submit" class="genre-container__submit-button btn-styling btn btn-default") Submit
+        label(type="submit" id="genre-submit" class="genre-container__submit-button btn-styling btn btn-default") Submit
 
   style.
     .genre-container__genre-group {
@@ -96,4 +96,4 @@ block content
 
   script(type="text/javascript" src="../bootstrap/js/jquery-1.10.2.min.js")
   script(type="text/javascript" src="../bootstrap/js/bootstrap.min.js")
-  script(type="text/javascript" src="../js/register.js")
+  script(type="text/javascript" src="../js/genre.js")
