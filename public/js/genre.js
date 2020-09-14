@@ -1,6 +1,6 @@
 
-const genreInfo = JSON.parse(localStorage.getItem('genreInfo')) //|| {};
-const userInfo = JSON.parse(localStorage.getItem('BADREADS_CURRENT_USER_ID')) //|| {};
+const genreInfo = JSON.parse(localStorage.getItem('genreInfo')) || {};
+const userInfo = JSON.parse(localStorage.getItem('BADREADS_CURRENT_USER_ID')) || {};
 // const activeInfo = JSON.parse(localStorage.getItem('activeInfo')) || {};
 const $checkboxes = $("#availableGenres :checkbox");
 const $selectAllButton = $("#genre-select-all");
